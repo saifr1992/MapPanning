@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             x:Class="MapsPanning.MainPage">
+    <StackLayout>
+
+    <Grid>
+        <Grid RowDefinitions="350,*">
+             <maps:Map  x:Name="positionMap"   PropertyChanged="positionMap_PropertyChanged"
+                              MapType="Hybrid" HasZoomEnabled="True"/>
+             <Image x:Name="pinImage" 
+                              Source="MapPin.png" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="50" />
+          </Grid>
+        <Grid Grid.Row="1">
+            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span FontSize="16" FontAttributes="Bold" Text="Latitude : "/>
+                        <Span x:Name="UserLatitude"/>
+                         <Span FontSize="16" FontAttributes="Bold" Text=" Longitude : "/>
+                        <Span x:Name="UserLongitude"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </Grid>
+        
+    </Grid>
+      
+    <StackLayout Margin="0,50,0,0" HorizontalOptions="Center" VerticalOptions="End">
+
+          <Label>Distance</Label>
+          <Label x:Name="DistanceVal"/>
+            <Label>INFO</Label>
+          <Label x:Name="mapInfo"/>
+            <!--<Label>City</Label>
+          <Label x:Name="City"/>
+            <Label>State</Label>
+          <Label x:Name="State"/>
+            <Label>Zip Code</Label>
+          <Label x:Name="code"/>-->
+        </StackLayout>
+  </StackLayout>
+</ContentPage>
