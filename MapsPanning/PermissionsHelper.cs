@@ -51,51 +51,6 @@ namespace MapsPanning
             return true;
         }
 
-        private async static Task<PermissionStatus> GetContactsWritePermission()
-        {
-            return await CheckAndRequestPermissionFromTaskCompletionAsync(new ContactsWrite());
-        }
-
-        public static async Task<bool> CheckAndGetContactsWritePermission()
-        {
-            PermissionStatus status = await GetContactsWritePermission();
-            if (status != PermissionStatus.Granted)
-            {
-                return false;
-            }
-            return true;
-        }
-
-        private static async Task<PermissionStatus> GetContactsPermission()
-        {
-            return await CheckAndRequestPermissionFromTaskCompletionAsync(new ContactsRead());
-        }
-
-        public static async Task<bool> CheckAndGetContactsPermission()
-        {
-            PermissionStatus status = await GetContactsPermission();
-            if (status != PermissionStatus.Granted)
-            {
-                return false;
-            }
-            return true;
-        }
-
-        private static async Task<PermissionStatus> GetCameraPermission()
-        {
-            return await CheckAndRequestPermissionFromTaskCompletionAsync(new Camera());
-        }
-
-        public static async Task<bool> CheckAndGetCameraPermission()
-        {
-            PermissionStatus status = await GetCameraPermission();
-            if (status != PermissionStatus.Granted)
-            {
-                return false;
-            }
-            return true;
-        }
-
         public async static Task<LocationModel> GetLastLocationAsync()
         {
             try
@@ -184,20 +139,12 @@ namespace MapsPanning
 
             if (locationModel != null)
             {
-                SetOnlyLatiAndLongInCache(locationModel.Location.Latitude, locationModel.Location.Longitude);
+                SetLocationInCache(locationModel);
             }
         }
 
-        public static void SetOnlyLatiAndLongInCache(double latitude, double longitude)
+        public static void SetLocationInCache(LocationModel locationModel)
         {
-            LocationModel locationModel = new LocationModel
-            {
-                Location = new Location
-                {
-                    Latitude = latitude,
-                    Longitude = longitude,
-                }
-            };
             Preferences.Set(App.UserLocation, JsonConvert.SerializeObject(locationModel));
         }
 

@@ -1,44 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
-             x:Class="MapsPanning.MainPage">
-    <StackLayout>
+<ContentPage
+    x:Class="MapsPanning.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+    xmlns:viewModel="clr-namespace:MapsPanning"
+    x:DataType="viewModel:MainPageViewModel"
+    xmlns:model="clr-namespace:MapsPanning.Model">
+    <ContentPage.BindingContext>
+        <viewModel:MainPageViewModel />
+    </ContentPage.BindingContext>
+    <Grid RowSpacing="0"
+          RowDefinitions="*, 20, Auto, 20">
+        <!-- Maps control -->
+        <maps:Map
+            Grid.Row="0"
+            x:Name="positionMap"
+            IsShowingUser="True"
+            ItemsSource="{Binding LocationHistories}"
+            MoveToLastRegionOnLayoutChange="True">
+            <maps:Map.ItemTemplate>
+                <DataTemplate x:DataType="model:LocationHistory">
+                    <maps:Pin
+                        Address="{Binding Address}"
+                        Label="Current Location"
+                        Position="{Binding Position}"
+                        Type="Place"> 
+                        <!-- Keep in mind that here is actual items binding happening -->
+                    </maps:Pin>
+                </DataTemplate>
+            </maps:Map.ItemTemplate>
+        </maps:Map>
 
-    <Grid>
-        <Grid RowDefinitions="350,*">
-             <maps:Map  x:Name="positionMap"   PropertyChanged="positionMap_PropertyChanged"
-                              MapType="Hybrid" HasZoomEnabled="True"/>
-             <Image x:Name="pinImage" 
-                              Source="MapPin.png" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="50" />
-          </Grid>
-        <Grid Grid.Row="1">
-            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span FontSize="16" FontAttributes="Bold" Text="Latitude : "/>
-                        <Span x:Name="UserLatitude"/>
-                         <Span FontSize="16" FontAttributes="Bold" Text=" Longitude : "/>
-                        <Span x:Name="UserLongitude"/>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-        </Grid>
-        
-    </Grid>
-      
-    <StackLayout Margin="0,50,0,0" HorizontalOptions="Center" VerticalOptions="End">
+        <StackLayout Grid.Row="2"
+                     VerticalOptions="Center">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Text="Latitude : " />
+                <Label Text="{Binding Latitude}" />
+            </StackLayout>
 
-          <Label>Distance</Label>
-          <Label x:Name="DistanceVal"/>
-            <Label>INFO</Label>
-          <Label x:Name="mapInfo"/>
-            <!--<Label>City</Label>
-          <Label x:Name="City"/>
-            <Label>State</Label>
-          <Label x:Name="State"/>
-            <Label>Zip Code</Label>
-          <Label x:Name="code"/>-->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Text="Longitude : " />
+                <Label Text="{Binding Longitude}" />
+            </StackLayout>
         </StackLayout>
-  </StackLayout>
+    </Grid>
 </ContentPage>
