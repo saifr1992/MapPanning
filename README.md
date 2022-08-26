@@ -1,8 +1,6 @@
 # MapPanning
 ## How to run the app?
-
-Please use visual studio 2019, 
-Using a map in IOS and Android https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/map/setup
+Please use Visual studio 2019. You can also use the map in IOS and Android https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/map/setup
 
 
 
@@ -10,9 +8,7 @@ Using a map in IOS and Android https://docs.microsoft.com/en-us/xamarin/xamarin-
 MVVM and Xamarin.Forms
 
 ## Notes
-Use Xamarin.Forms maps nuget
-The app is using xamarin forms, is am using MVVM pattern.
-The timer gets the location after every 6 second. 
+Use https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/map/ nuget. The app is using xamarin forms and I am using MVVM pattern. The timer gets the location after every 6 seconds.
 
 ## Get Ideas from
 
@@ -24,6 +20,5 @@ The timer gets the location after every 6 second.
 
 
 ## Hours spent on the app
-
-10-12h spend for both android and IOS.
+10-12h spent for both android and IOS.
 
