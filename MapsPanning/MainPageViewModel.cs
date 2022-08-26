@@ -131,7 +131,7 @@ namespace MapsPanning
             {
                 currentLocation = locationModel.Location;
                 //setting location first time
-                SetupCurrentLocation();
+                SetupCurrentLocation(locationModel.Location);
             }
             else
             {
@@ -140,7 +140,7 @@ namespace MapsPanning
                 {
                     MainPage.DisplayMessageAction.Invoke(distance);
                     //setting up location after as current one
-                    SetupCurrentLocation();
+                    SetupCurrentLocation(locationModel.Location);
                 }
             }
         }
@@ -151,9 +151,10 @@ namespace MapsPanning
             return distance.Meters;
         }
 
-        private async void SetupCurrentLocation()
+        private async void SetupCurrentLocation(Location location)
         {
-            MainPage.SetMapPositionAction?.Invoke(currentLocation);
+            MainPage.SetMapPositionAction?.Invoke(location);
+            currentLocation = location;
             var placemarks = await Geocoding.GetPlacemarksAsync(currentLocation.Latitude, currentLocation.Longitude);
             var placemark = placemarks?.FirstOrDefault();
             string address = String.Empty;
